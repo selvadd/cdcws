@@ -18,6 +18,7 @@ import wsutils.*;
 import com.google.gson.Gson;
 
 @RestController
+@RequestMapping(value="/services")
 public class QuickSearchResultsController {
 
 	private Logger log = Logger.getLogger(QuickSearchResultsController.class.getName());
@@ -227,7 +228,7 @@ public class QuickSearchResultsController {
 	} //
 
 	/**
-	 * 
+	 * /online-product/quick-search/search-results
 	 * @param sessionId
 	 * @param securityKey
 	 * @param stateIds
@@ -240,7 +241,7 @@ public class QuickSearchResultsController {
 	 * @param displayMode
 	 * @return
 	 */
-	@RequestMapping(value = "/online-product/quick-search/search-results")
+	@RequestMapping(value = "/quickSearchResults")
 	public String getContentDetails(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey,
 			@RequestParam("stateIds") String stateIds, @RequestParam("sectionIdList") String sectionIdList, @RequestParam("newUpdatedFlag") int newUpdatedFlag,
 			@RequestParam("subSectionList") String subSectionList, @RequestParam("constructionTypes") String constructionTypes,

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cdc.ws.controller;
+package com.cdc.ws.demo;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

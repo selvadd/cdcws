@@ -8,13 +8,13 @@ import java.util.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
 @RestController
+@RequestMapping(value="/services")
 public class QuickSearchFormDetailsController {
 
 	private Logger log = Logger.getLogger(QuickSearchFormDetailsController.class.getName());
@@ -91,12 +91,12 @@ public class QuickSearchFormDetailsController {
 	}
 
 	/**
-	 * 
+	 * /online-product/quick-search
 	 * @param sessionId
 	 * @param securityKey
 	 * @return
 	 */
-	@RequestMapping(value="/online-product/quick-search")
+	@RequestMapping(value="/quickSearchFormDetails")
 	public String getQuickSearchFormat(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey) {
 		
 		Map<String, Object> map = null;

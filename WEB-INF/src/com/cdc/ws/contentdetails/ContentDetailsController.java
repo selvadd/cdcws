@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
  */
 
 @RestController
+@RequestMapping(value="/services")
 public class ContentDetailsController {
 
 	private static Logger log = Logger.getLogger(ContentDetailsController.class.getName());
@@ -95,13 +96,13 @@ public class ContentDetailsController {
 	}// end of getContentDetailsByCdcId
 
 	/**
-	 * 
+	 * /online-product/project-details-by-ids
 	 * @param sessionId
 	 * @param securityKey
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/online-product/project-details-by-ids")
+	@RequestMapping(value = "/projectDetails")
 	public String getProjectDetails(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey, @RequestParam("ids") String ids) {
 		Map<String, Object> map = null;
 		Gson gson = null;
@@ -180,11 +181,11 @@ public class ContentDetailsController {
 
 	/**
 	 * getPubProjectDetails for public search project display without login
-	 * 
+	 * /online-product/pub-project-details
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/online-product/pub-project-details")
+	@RequestMapping(value = "/publicProjectDetails")
 	public String getPubProjectDetails(@RequestParam("ids") String ids) {
 		Map<String, Object> map = null;
 		Gson gson = null;
@@ -209,13 +210,13 @@ public class ContentDetailsController {
 	}
 
 	/**
-	 * 
+	 * /online-product/project-details-by-cdcids
 	 * @param sessionId
 	 * @param securityKey
 	 * @param cdcids
 	 * @return
 	 */
-	@RequestMapping(value = "/online-product/project-details-by-cdcids")
+	@RequestMapping(value = "/projectDetailsByCdcId")
 	public String getProjectDetailsByCdcId(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey,
 			@RequestParam("cdcids") String cdcids) {
 		Map<String, Object> map = null;

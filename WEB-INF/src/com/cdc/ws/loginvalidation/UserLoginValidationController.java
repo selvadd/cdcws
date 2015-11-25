@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 @RestController
+@RequestMapping(value="/services")
 public class UserLoginValidationController {
 
 	private Logger log = Logger.getLogger(UserLoginValidationController.class.getName());
@@ -37,7 +38,14 @@ public class UserLoginValidationController {
 		return wsLoginEJB;
 	}
 
-	@RequestMapping(value = "/online-product/login/validation", method = RequestMethod.GET)
+	/**
+	 * /online-product/login/validation
+	 * @param username
+	 * @param pwd
+	 * @param siteId
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String checkLoggedUser(@RequestParam("username") String username, 
 			@RequestParam("pwd") String pwd, @RequestParam("siteId") int siteId) {
 
@@ -196,12 +204,12 @@ public class UserLoginValidationController {
 
 	/**
 	 * Called while user logging out
-	 * 
+	 * /online-product/logout
 	 * @param sessionId
 	 * @param securityKey
 	 * @return
 	 */
-	@RequestMapping(value = "/online-product/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logOut(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey) {
 
 		Map<String, Object> map = null;
