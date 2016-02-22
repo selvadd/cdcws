@@ -21,7 +21,7 @@ import wsutils.LoginUtil;
 import com.google.gson.Gson;
 
 /**
- * @author admin
+ * @author Selva
  *
  */
 @RestController
@@ -120,7 +120,7 @@ public class UserSettingsController {
 		LeadManagerSessionData lmData = null;
 		Connection con = null;
 		WSUserSetting wsUserSetting = null;
-		
+
 		try {
 
 			gson = new Gson();

@@ -1,7 +1,5 @@
 package com.cdc.ws.savedsearch;
 
-//import org.json.simple.JSONObject;
-//import org.json.simple.JSONArray;
 import wsdatamodel.SavedSearchData;
 import wsdatamodel.LeadManagerSessionData;
 import wsutils.EJBClient;
@@ -23,6 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Selva
+ *
+ */
+
 @RestController
 @RequestMapping(value = "/services")
 public class SavedSearchController {
@@ -43,7 +46,7 @@ public class SavedSearchController {
 	}
 
 	// GET SAVED SEARCH NAMES FOR A LOGIN ID
-	@RequestMapping(value="/savedSearchList")
+	@RequestMapping(value = "/savedSearchList")
 	public String getSavedSearches(@RequestParam("sessionId") int sessionID, @RequestParam("securityKey") String securityKey) {
 
 		Map<String, Object> map = null;
@@ -52,7 +55,7 @@ public class SavedSearchController {
 		boolean validSessionId = false;
 		LeadManagerSessionData lmData = null;
 		WSSavedSearch savedSearch = null;
-		
+
 		try {
 			gson = new Gson();
 			map = new HashMap<String, Object>();
@@ -67,10 +70,10 @@ public class SavedSearchController {
 			if (validSessionId == true) {
 
 				lmData = LoginUtil.getLeadManagerSessionDetails(sessionID, con);
-				
+
 				map.put("iTotalRecords", "1");
 				map.put("Status", "Success");
-				map.put("Message", "");				 
+				map.put("Message", "");
 				map.put("aaData", savedSearch.getSavedSearchInfo(1, lmData.getLogin()));
 
 			} // end of if for valid session check
@@ -147,8 +150,9 @@ public class SavedSearchController {
 	} // getSavedSearchbyName
 
 	// GET SAVED SEARCH INFO FOR A LOGIN ID BY SEARCH NAME
-	@RequestMapping(value="/savedSearchInfo")
-	public String getSavedSearchInfoBySearchName(@RequestParam("sessionId") int sessionID, @RequestParam("securityKey") String securityKey, @RequestParam("savedSearchName") String savedSearchName) {
+	@RequestMapping(value = "/savedSearchInfo")
+	public String getSavedSearchInfoBySearchName(@RequestParam("sessionId") int sessionID, @RequestParam("securityKey") String securityKey,
+			@RequestParam("savedSearchName") String savedSearchName) {
 
 		Map<String, Object> map = null;
 		Gson gson = null;
@@ -156,7 +160,7 @@ public class SavedSearchController {
 
 		boolean validSessionId = false;
 		LeadManagerSessionData lmData = null;
-		
+
 		try {
 			gson = new Gson();
 			map = new HashMap<String, Object>();
@@ -169,7 +173,7 @@ public class SavedSearchController {
 			if (validSessionId == true) {
 
 				lmData = LoginUtil.getLeadManagerSessionDetails(sessionID, con);
-				
+
 				map.put("iTotalRecords", "1");
 				map.put("Status", "Success");
 				map.put("Message", "");
@@ -199,7 +203,7 @@ public class SavedSearchController {
 	/*
 	 * typeId- 1 for update 2 for delete
 	 */
-	@RequestMapping(value="/updateDeleteSavedSearch")
+	@RequestMapping(value = "/updateDeleteSavedSearch")
 	public String updateDeleteSavedSearch(int sessionID, String securityKey, int typeId, String searchName, String oldSearchName) {
 		// log.info("Inside updateDeleteSavedSearch:loginId= " );
 		Map<String, Object> map = null;
@@ -209,7 +213,7 @@ public class SavedSearchController {
 		boolean updateDeleteflag = false;
 		LeadManagerSessionData lmData = null;
 		WSSavedSearch savedSearch = null;
-		
+
 		try {
 			gson = new Gson();
 			map = new HashMap<String, Object>();
@@ -256,7 +260,7 @@ public class SavedSearchController {
 
 		return gson.toJson(map);
 	}// END OF updateDeleteSavedSearch
-	
+
 	/**
 	 * Gets the saved search name from the provided parameters by accessing the saved search bean and updates the info on emailhotlist table
 	 *
@@ -270,10 +274,10 @@ public class SavedSearchController {
 	 * @throws RemoteException
 	 * @throws LoginException
 	 */
-	@RequestMapping(value="/updateEmailReminder")
+	@RequestMapping(value = "/updateEmailReminder")
 	public String updateSavedSearchEmailReminder(int sessionID, String securityKey, String savedSearchName, String freq, String periodValue, String notes,
 			String emailTo, String enabledFlag) {
-		
+
 		// log.info("Inside updateSavedSearchEmailReminder:loginId= " );
 		Map<String, Object> map = null;
 		Gson gson = null;
@@ -282,7 +286,7 @@ public class SavedSearchController {
 		LeadManagerSessionData lmData = null;
 		Connection con = null;
 		WSSavedSearch savedSearch = null;
-		
+
 		try {
 
 			gson = new Gson();
@@ -359,12 +363,12 @@ public class SavedSearchController {
 	 * @param displayMode
 	 * @return
 	 */
-	@RequestMapping(value="/updateSavedSearch")	
+	@RequestMapping(value = "/updateSavedSearch")
 	public String updateSavedSearchCriteria(int sessionID, String securityKey, String savedSearchName, String states, String counties, int noOfdays,
 			String jobs, String sections, String stages, String constructionTypes, String bidTypes, String divisions, String projKeywords,
 			String contactsKeyword, String planningStages, String contractingMethods, String indTypes, String valueMin, String valueMax, String unitOfMsrmt,
 			String unitOfMsrmtMin, String unitOfMsrmtMax, String bidDateFrom, String bidDateTo, String showAll, String displayMode) {
-		
+
 		// log.info("Inside updateSavedSearchCriteria:loginId= ");
 		Map<String, Object> map = null;
 		Gson gson = null;
@@ -373,7 +377,7 @@ public class SavedSearchController {
 		LeadManagerSessionData lmData = null;
 		Connection con = null;
 		WSSavedSearch savedSearch = null;
-		
+
 		try {
 
 			gson = new Gson();
@@ -453,12 +457,12 @@ public class SavedSearchController {
 	 * @param displayMode
 	 * @return
 	 */
-	@RequestMapping(value="/insertSavedSearch")
+	@RequestMapping(value = "/insertSavedSearch")
 	public String insertSavedSearchCriteria(int sessionID, String securityKey, String savedSearchName, String states, String counties, int noOfdays,
 			String jobs, String sections, String stages, String constructionTypes, String bidTypes, String divisions, String projKeywords,
 			String contactsKeyword, String planningStages, String contractingMethods, String indTypes, String valueMin, String valueMax, String unitOfMsrmt,
 			String unitOfMsrmtMin, String unitOfMsrmtMax, String bidDateFrom, String bidDateTo, String showAll, String displayMode) {
-		
+
 		// log.info("Inside insertSavedSearchCriteria:loginId= ");
 		Map<String, Object> map = null;
 		Gson gson = null;
@@ -467,7 +471,7 @@ public class SavedSearchController {
 		LeadManagerSessionData lmData = null;
 		Connection con = null;
 		WSSavedSearch savedSearch = null;
-		
+
 		try {
 			gson = new Gson();
 			map = new HashMap<String, Object>();
@@ -524,7 +528,7 @@ public class SavedSearchController {
 	 * @param copyToUser
 	 * @return
 	 */
-	@RequestMapping(value="/copySavedSearch")
+	@RequestMapping(value = "/copySavedSearch")
 	public String copySavedSearch(int sessionID, String securityKey, String savedSearchName, String copyToUser) {
 		// log.info("Inside copySavedSearch:loginId= ");
 		Map<String, Object> map = null;
@@ -534,7 +538,7 @@ public class SavedSearchController {
 		LeadManagerSessionData lmData = null;
 		Connection con = null;
 		WSSavedSearch savedSearch = null;
-		
+
 		try {
 
 			gson = new Gson();
@@ -616,7 +620,7 @@ public class SavedSearchController {
 	 * @param disMode
 	 * @return
 	 */
-	@RequestMapping(value="/saveSearch")
+	@RequestMapping(value = "/saveSearch")
 	public String saveNewSearch(int sessionID, String securityKey, String searchName, String emailOption, String ifEveryWeek, String ifEveryMonth,
 			String specificDate, String sendResultTo, String notes, String stateIds, String countyIds, int days, String jobs, String sections, String stages,
 			String constructionTypes, String bidTypes, String Div, String projKeyword, String contactsKeyword, String planningStages, String constrMethods,
@@ -630,7 +634,7 @@ public class SavedSearchController {
 		LeadManagerSessionData lmData = null;
 		Connection con = null;
 		WSSavedSearch savedSearch = null;
-		
+
 		try {
 			gson = new Gson();
 			map = new HashMap<String, Object>();
@@ -639,7 +643,7 @@ public class SavedSearchController {
 				con = JDBCUtil.getDBConnectionFromDatabase();
 
 			savedSearch = getUserSavedSearchBean();
-			
+
 			validSessionId = LoginUtil.checkValidSession(sessionID, securityKey, con);
 
 			if (validSessionId) {

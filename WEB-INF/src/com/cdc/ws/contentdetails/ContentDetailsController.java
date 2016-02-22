@@ -29,7 +29,7 @@ import com.google.gson.GsonBuilder;
  */
 
 @RestController
-@RequestMapping(value="/services")
+@RequestMapping(value = "/services")
 public class ContentDetailsController {
 
 	private static Logger log = Logger.getLogger(ContentDetailsController.class.getName());
@@ -97,6 +97,7 @@ public class ContentDetailsController {
 
 	/**
 	 * /online-product/project-details-by-ids
+	 * 
 	 * @param sessionId
 	 * @param securityKey
 	 * @param ids
@@ -180,8 +181,8 @@ public class ContentDetailsController {
 	}
 
 	/**
-	 * getPubProjectDetails for public search project display without login
-	 * /online-product/pub-project-details
+	 * getPubProjectDetails for public search project display without login /online-product/pub-project-details
+	 * 
 	 * @param ids
 	 * @return
 	 */
@@ -211,17 +212,20 @@ public class ContentDetailsController {
 
 	/**
 	 * /online-product/project-details-by-cdcids
+	 * 
 	 * @param sessionId
 	 * @param securityKey
-	 * @param cdcids
+	 * @param cdcIds
 	 * @return
 	 */
 	@RequestMapping(value = "/projectDetailsByCdcId")
 	public String getProjectDetailsByCdcId(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey,
-			@RequestParam("cdcids") String cdcids) {
+			@RequestParam("cdcIds") String cdcIds) {
+
 		Map<String, Object> map = null;
 		Gson gson = null;
 		Connection con = null;
+
 		try {
 
 			gson = new GsonBuilder().serializeNulls().create();
@@ -238,7 +242,7 @@ public class ContentDetailsController {
 
 				int size = 1;
 				ArrayList contentDetails = null;
-				contentDetails = getContentDetailsByCdcId(cdcids);
+				contentDetails = getContentDetailsByCdcId(cdcIds);
 
 				if (contentDetails != null) {
 					size = contentDetails.size();

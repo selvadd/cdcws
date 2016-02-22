@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+/**
+ * @author Selva
+ *
+ */
+
 @RestController
-@RequestMapping(value="/services")
+@RequestMapping(value = "/services")
 public class QuickSearchFormDetailsController {
 
 	private Logger log = Logger.getLogger(QuickSearchFormDetailsController.class.getName());
@@ -29,17 +34,17 @@ public class QuickSearchFormDetailsController {
 	public ArrayList<SearchFormData> getQuickSearchFormInfo(int sessionId, String securityKey, Connection con) {
 
 		String userStateIdList = null;
-		//String userCountyIdList = null;
+		// String userCountyIdList = null;
 		String geoUserStateIdList = null;
-		//String geoUserCountyIdList = null;
+		// String geoUserCountyIdList = null;
 		String userStateIds = null;
-		//String userCountyIds = null;
+		// String userCountyIds = null;
 		LeadManagerSessionData lmData = LoginUtil.getLeadManagerSessionDetails(sessionId, con);
 		// USER SUBSCRIBED STATE AND COUNTY LIST
 		userStateIdList = lmData.getUserStateList();
-		//userCountyIdList = lmData.getUserCountyList();
+		// userCountyIdList = lmData.getUserCountyList();
 		geoUserStateIdList = lmData.getGeoUserStateList();
-		//geoUserCountyIdList = lmData.getGeoUserCountyList();
+		// geoUserCountyIdList = lmData.getGeoUserCountyList();
 
 		/* User state list */
 		if (geoUserStateIdList != null && userStateIdList != null) {
@@ -92,17 +97,18 @@ public class QuickSearchFormDetailsController {
 
 	/**
 	 * /online-product/quick-search
+	 * 
 	 * @param sessionId
 	 * @param securityKey
 	 * @return
 	 */
-	@RequestMapping(value="/quickSearchFormDetails")
+	@RequestMapping(value = "/quickSearchFormDetails")
 	public String getQuickSearchFormat(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey) {
-		
+
 		Map<String, Object> map = null;
 		Gson gson = null;
 		Connection con = null;
-		
+
 		try {
 
 			gson = new Gson();

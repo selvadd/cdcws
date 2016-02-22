@@ -44,7 +44,7 @@ public class SavedSearchResultsController {
 
 	private Logger log = Logger.getLogger(SavedSearchResultsController.class.getName());
 
-	//int size = 0;
+	int size = 0;
 
 	/**
 	 * compareDates - checks whether the 2 given dates are equal, greater than or equal, less than or equal, greater than and less than
@@ -741,7 +741,7 @@ public class SavedSearchResultsController {
 			if (stmt != null)
 				stmt.close();
 
-			//size = contentIdList.size();
+			size = contentIdList.size();
 			/*
 			 * startIndex = (pageNumber - 1) * recordsPerPage; endIndex = pageNumber * (recordsPerPage - 1); endIndex = endIndex + 1;
 			 */
@@ -1045,7 +1045,7 @@ public class SavedSearchResultsController {
 	public String getContentDetailsPL(int sessionId, String securityKey, String searchName, String runHotlist, int pageNumber, int recordsPerPage,
 			String sortOrder, String sortType, String searchText, String contactSearchText, String refinePKeywordText, String refineCKeywordText)
 			throws IOException {
-		
+
 		Map<String, Object> map = null;
 		Gson gson = null;
 		LeadManagerSessionData lmData = null;
@@ -1078,8 +1078,8 @@ public class SavedSearchResultsController {
 						getSavedSearchInfoPL(sessionId, securityKey, lmData.getLogin(), searchName, runHotlist, pageNumber, recordsPerPage, sortOrder,
 								sortType, searchText, contactSearchText, refinePKeywordText, refineCKeywordText, con);
 
-				//int totRecords = size;
-				int totRecords = LibraryFunctions.getListFromString(contentIds).size();
+				int totRecords = size;
+				// int totRecords = LibraryFunctions.getListFromString(contentIds).size();
 
 				log("ContentIds: " + contentIds);
 				log("iTotalRecords: " + totRecords);
@@ -1093,7 +1093,7 @@ public class SavedSearchResultsController {
 				map.put("aoColumns",
 						"ID,CDC ID,Job Type,Bid Date,Title,estimated_amount_lower,Sub Section,county,state,Plan Availability Status,PT STATUS,New Job Status,City");
 
-				//size = 0;
+				size = 0;
 
 			} else {
 				log("Invalid Session :sessionId: " + sessionId);
@@ -1800,7 +1800,6 @@ public class SavedSearchResultsController {
 		return contentIds;
 	} // getSavedSearchInfo
 
-	
 	/**
 	 * 
 	 * @param sessionId
@@ -1971,17 +1970,16 @@ public class SavedSearchResultsController {
 	 */
 	public BufferedWriter logInit() {
 
-		FileWriter fw = null;
 		BufferedWriter bw = null;
-		String date = new SimpleDateFormat("MMddyy").format(new java.util.Date());
-		File f = new File("wslogs/webservice_" + date + ".log");
 
 		try {
+			String date = new SimpleDateFormat("MMddyy").format(new java.util.Date());
+			File f = new File("wslogs/webservice_" + date + ".log");
+
 			if (!f.exists())
 				f.createNewFile();
 
-			fw = new FileWriter(f, true);
-
+			FileWriter fw = new FileWriter(f, true);
 			bw = new BufferedWriter(fw);
 
 		} catch (Exception e) {
@@ -2000,11 +1998,13 @@ public class SavedSearchResultsController {
 
 		BufferedWriter bw = null;
 		try {
-			bw = logInit();
 
 			String logtime = new SimpleDateFormat("d MMM yyyy H:m:s,S").format(new java.util.Date());
 
-			bw.write(logtime + "[" + this.getClass().getName() + "] -" + info + "\n");
+			bw = logInit();
+
+			if (bw != null)
+				bw.write(logtime + "[" + this.getClass().getName() + "] -" + info + "\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

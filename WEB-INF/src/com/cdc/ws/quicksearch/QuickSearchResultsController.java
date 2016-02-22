@@ -17,8 +17,13 @@ import wsutils.*;
 
 import com.google.gson.Gson;
 
+/**
+ * @author Selva
+ *
+ */
+
 @RestController
-@RequestMapping(value="/services")
+@RequestMapping(value = "/services")
 public class QuickSearchResultsController {
 
 	private Logger log = Logger.getLogger(QuickSearchResultsController.class.getName());
@@ -43,32 +48,29 @@ public class QuickSearchResultsController {
 		ResultSet rs = null;
 		Statement stmt = null;
 		String sql = null;
-		//String userStateIdList = null;
+		// String userStateIdList = null;
 		String userCountyIdList = null;
-		//String geoUserStateIdList = null;
+		// String geoUserStateIdList = null;
 		String geoUserCountyIdList = null;
-		//String userStateIds = null;
+		// String userStateIds = null;
 		String userCountyIds = null;
 		// String nationalChainUser = null;
 		String contentIdList = null;
-		
+
 		try {
 
 			LeadManagerSessionData lmData = LoginUtil.getLeadManagerSessionDetails(sessionId, con);
 			// USER SUBSCRIBED STATE AND COUNTY LIST
-			//userStateIdList = lmData.getUserStateList();
+			// userStateIdList = lmData.getUserStateList();
 			userCountyIdList = lmData.getUserCountyList();
-			//geoUserStateIdList = lmData.getGeoUserStateList();
+			// geoUserStateIdList = lmData.getGeoUserStateList();
 			geoUserCountyIdList = lmData.getGeoUserCountyList();
 
 			/* User state list */
-			/*if (geoUserStateIdList != null && userStateIdList != null) {
-				userStateIds = userStateIdList + "," + geoUserStateIdList;
-			} else if (userStateIdList != null) {
-				userStateIds = userStateIdList;
-			} else if (geoUserStateIdList != null) {
-				userStateIds = geoUserStateIdList;
-			}*/
+			/*
+			 * if (geoUserStateIdList != null && userStateIdList != null) { userStateIds = userStateIdList + "," + geoUserStateIdList; } else if
+			 * (userStateIdList != null) { userStateIds = userStateIdList; } else if (geoUserStateIdList != null) { userStateIds = geoUserStateIdList; }
+			 */
 
 			/* User county list */
 			if (geoUserCountyIdList != null && userCountyIdList != null) {
@@ -116,7 +118,7 @@ public class QuickSearchResultsController {
 			sql += "AND entry_date >= convert(varchar,dateadd(day,-90,getdate()),101)";
 
 			// stateIds
-			
+
 			if (stateIds != null && !stateIds.trim().equals("")) {
 
 				sql += "AND s.state_id in (" + stateIds + ")";
@@ -229,6 +231,7 @@ public class QuickSearchResultsController {
 
 	/**
 	 * /online-product/quick-search/search-results
+	 * 
 	 * @param sessionId
 	 * @param securityKey
 	 * @param stateIds

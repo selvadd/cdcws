@@ -19,8 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+/**
+ * @author Selva
+ *
+ */
+
 @RestController
-@RequestMapping(value="/services")
+@RequestMapping(value = "/services")
 public class UserLoginValidationController {
 
 	private Logger log = Logger.getLogger(UserLoginValidationController.class.getName());
@@ -40,14 +45,15 @@ public class UserLoginValidationController {
 
 	/**
 	 * /online-product/login/validation
+	 * 
 	 * @param username
 	 * @param pwd
 	 * @param siteId
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String checkLoggedUser(@RequestParam("username") String username, 
-			@RequestParam("pwd") String pwd, @RequestParam("siteId") int siteId) {
+	@RequestMapping(value = "/login",
+			method = RequestMethod.GET)
+	public String checkLoggedUser(@RequestParam("username") String username, @RequestParam("pwd") String pwd, @RequestParam("siteId") int siteId) {
 
 		Map<String, Object> map = null;
 		Gson gson = null;
@@ -203,13 +209,14 @@ public class UserLoginValidationController {
 	} // End of getMasterSubUserDetails
 
 	/**
-	 * Called while user logging out
-	 * /online-product/logout
+	 * Called while user logging out /online-product/logout
+	 * 
 	 * @param sessionId
 	 * @param securityKey
 	 * @return
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout",
+			method = RequestMethod.GET)
 	public String logOut(@RequestParam("sessionId") int sessionId, @RequestParam("securityKey") String securityKey) {
 
 		Map<String, Object> map = null;
@@ -222,7 +229,7 @@ public class UserLoginValidationController {
 			map = new HashMap<String, Object>();
 
 			// INSERTION INTO LEADMANAGER SESSION TABLE
-			//ResultSet rs = null;
+			// ResultSet rs = null;
 			CallableStatement cstmt = null;
 			LeadManagerSessionData lmData = null;
 

@@ -1,4 +1,4 @@
-package com.cdc.ws.pttracker;
+package com.cdc.ws.projecttracker;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,6 +26,11 @@ import wsutils.LoginUtil;
 import wsutils.WebUsageUtil;
 
 import com.google.gson.Gson;
+
+/**
+ * @author Selva
+ *
+ */
 
 @RestController
 @RequestMapping(value = "/services")
@@ -474,15 +479,17 @@ public class ProjectTrackerController {
 	 * Init log writer
 	 */
 	public BufferedWriter logInit() {
-		String date = new SimpleDateFormat("MMddyy").format(new java.util.Date());
-		File f = new File("wslogs/webservice_" + date + ".log");
+
 		BufferedWriter bw = null;
-		FileWriter fw = null;
+
 		try {
+			String date = new SimpleDateFormat("MMddyy").format(new java.util.Date());
+			File f = new File("wslogs/webservice_" + date + ".log");
+
 			if (!f.exists())
 				f.createNewFile();
 
-			fw = new FileWriter(f, true);
+			FileWriter fw = new FileWriter(f, true);
 			bw = new BufferedWriter(fw);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -499,10 +506,13 @@ public class ProjectTrackerController {
 
 		BufferedWriter bw = null;
 		try {
-			bw = logInit();
+
 			String logtime = new SimpleDateFormat("d MMM yyyy H:m:s,S").format(new java.util.Date());
-			;
-			bw.write(logtime + "[" + this.getClass().getName() + "] -" + info + "\n");
+
+			bw = logInit();
+
+			if (bw != null)
+				bw.write(logtime + "[" + this.getClass().getName() + "] -" + info + "\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
